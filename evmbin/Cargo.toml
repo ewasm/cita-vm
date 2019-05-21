@@ -1,0 +1,23 @@
+[package]
+name = "evmbin"
+description = "benchmarking bin for cita-evm"
+version = "0.1.0"
+
+[[bin]]
+name = "cita-evm"
+path = "./src/main.rs"
+
+[dependencies]
+env_logger = "0.6"
+ethereum-types = "0.4"
+hex = "0.3"
+keccak-hash = "0.1"
+log = "0.4"
+docopt = "1.0"
+serde = "1.0"
+serde_derive = "1.0"
+parity-bytes = "0.1"
+rustc-hex = "1.0"
+
+cita-evm = { path="../evm", version="0.1" }
+cita-vm = { path="../", version="0.1" }
