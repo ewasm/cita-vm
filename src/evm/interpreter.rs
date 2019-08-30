@@ -1,7 +1,7 @@
 use std::cmp;
 
 use ethereum_types::{Address, H256, U256, U512};
-use log::debug;
+use log::{warn,debug};
 
 use crate::evm::common;
 use crate::evm::err;
@@ -1118,6 +1118,7 @@ impl Interpreter {
                     let b = self
                         .data_provider
                         .selfdestruct(&self.params.address, &common::u256_to_address(&address));
+                    warn!("--------- SELFDESTRUCT address {:?} pa {:?} {:?}",common::u256_to_address(&address),self.params.address,b);
                     if !b {
                         // Imaging this, what if we `SELFDESTRUCT` a contract twice,
                         // what will happend?

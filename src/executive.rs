@@ -5,7 +5,7 @@ use cita_trie::DB;
 use ethereum_types::{Address, H256, U256};
 use evm::InterpreterParams;
 use hashbrown::{HashMap, HashSet};
-use log::debug;
+use log::{warn,debug};
 use rlp::RlpStream;
 
 use crate::common;
@@ -664,7 +664,7 @@ impl<B: DB + 'static> evm::DataProvider for DataProvider<B> {
     }
 
     fn sub_refund(&mut self, address: &Address, n: u64) {
-        debug!("ext.sub_refund {:?} {}", address, n);
+        warn!("ext.sub_refund {:?} {}", address, n);
         self.store
             .borrow_mut()
             .refund
@@ -743,6 +743,7 @@ impl<B: DB + 'static> evm::DataProvider for DataProvider<B> {
         self.store.borrow_mut().selfdestruct.insert(address.clone());
         let b = self.get_balance(address);
 
+        warn!("---------exec selfdestruct {:?}",self.store.borrow_mut().selfdestruct);
         if address != refund_to {
             self.state_provider
                 .borrow_mut()
